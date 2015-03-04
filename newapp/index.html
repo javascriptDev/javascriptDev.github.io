@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="browsermode" content="application">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<title>fashion app</title>
+	<script src="uitl.js"></script>
+	<script src="index.js"></script>
+	<link href="index.css" rel="stylesheet">
+</head>
+<body style="position: relative">
+<div class="c">
+	<div class="wrapper" style="position: absolute">
+	</div>
+</div>
+<script>
+	var wrapper = document.querySelector('.wrapper'),
+			container = document.querySelector('.c'),
+			height = document.documentElement.clientHeight,
+			width = document.documentElement.clientWidth,
+	//当前页面
+			index = 1;
+	//滑动百分比跳页
+	var percentToTurn = 0.3;
+	var speed = 100;
+	var pages = [];
+	function init(count) {
+		var s = container.style;
+		s.height = height + 'px';
+		s.width = width + 'px';
+		s.lineHeight = height + 'px';
+		wrapper.style.width = width + 'px';
+
+		var a = new Page({
+			c: wrapper,
+			fill: function () {
+				this.el.innerHTML = '<div class="w320 a leftHide "><div class="name" >姓名:高宇桥</div></div>' +
+						'<div class="a leftHide sex">性别:男</div>' +
+						'<div class="a leftHide position">职位:前端</div>' +
+						'<div class="a leftHide hobby">爱好:无</div>';
+			},
+			frame: function () {
+				var me = this;
+				setTimeout(function () {
+					me.el.firstChild.style.webkitTransform = 'translateX(0)';
+					setTimeout(function () {
+						me.el.querySelector('.sex').style.webkitTransform = 'translateX(0)';
+						setTimeout(function () {
+							me.el.querySelector('.position').style.webkitTransform = 'translateX(0)';
+							setTimeout(function () {
+								me.el.querySelector('.hobby').style.webkitTransform = 'translateX(0)';
+							}, speed * 2)
+						}, speed * 2)
+					}, speed)
+				}, speed)
+
+			}
+		})
+		var b = new Page({
+			c: wrapper,
+			fill: function () {
+				this.el.innerHTML = '<div class="a rightHide name">婚否:no</div>' +
+						'<div class="a rightHide sex">工作经历:无</div>' +
+						'<div class="a rightHide position">职业未来:无</div>' +
+						'<div class="a rightHide hobby">自我介绍:无</div>';
+
+			},
+			frame: function () {
+				var me = this;
+				setTimeout(function () {
+					me.el.firstChild.style.webkitTransform = 'translateX(0)';
+					setTimeout(function () {
+						me.el.querySelector('.sex').style.webkitTransform = 'translateX(0)';
+						setTimeout(function () {
+							me.el.querySelector('.position').style.webkitTransform = 'translateX(0)';
+							setTimeout(function () {
+								me.el.querySelector('.hobby').style.webkitTransform = 'translateX(0)';
+							}, speed)
+						}, speed)
+					}, speed)
+				}, speed)
+
+
+			}
+		})
+		var c = new Page({
+			c: wrapper,
+			fill: function () {
+				this.el.innerHTML = '<div class="b topHide name">婚否:no</div>' +
+						'<div class="b topHide sex">工作经历:无</div>' +
+						'<div class="b topHide position">职业未来:无</div>' +
+						'<div class="b topHide hobby">自我介绍:无</div>';
+			},
+			frame: function () {
+				var me = this;
+				setTimeout(function () {
+					me.el.firstChild.style.webkitTransform = 'translateY(0)';
+					setTimeout(function () {
+						me.el.querySelector('.sex').style.webkitTransform = 'translateX(0)';
+						setTimeout(function () {
+							me.el.querySelector('.position').style.webkitTransform = 'translateX(0)';
+							setTimeout(function () {
+								me.el.querySelector('.hobby').style.webkitTransform = 'translateX(0)';
+							}, speed*3)
+						}, speed*3)
+					}, speed*3)
+				}, speed*3)
+
+
+			}
+		})
+		pages.push(a);
+		pages.push(b);
+		pages.push(c);
+	}
+	var pageCount = 3;
+	init(pageCount);
+	function begin() {
+		pages[0].animate();
+	}
+	begin();
+	var bp = 0, tp = 0;
+	var end = 0;
+	//动画完，删除transition 防止 页面滑动卡顿
+	wrapper.addEventListener('webkitTransitionEnd', function (e) {
+		wrapper.style.webkitTransition = '';
+		pages[index - 1].animate();
+	})
+	wrapper.addEventListener('transitionEnd', function (e) {
+		wrapper.style.webkitTransition = '';
+	})
+
+	function getTop() {
+		return parseInt(wrapper.style.top);
+	}
+	wrapper.addEventListener('touchstart', function (e) {
+		e.preventDefault();
+		var target = e.touches[0];
+		bp = target.clientY;
+		tp = isNaN(parseInt(wrapper.style.top)) ? 0 : parseInt(wrapper.style.top);
+	})
+	wrapper.addEventListener('touchmove', function (e) {
+		e.preventDefault();
+		var target = e.touches[0];
+		end = target.clientY;
+		var dis = tp + end - bp;
+		wrapper.style.top = dis + 'px';
+	})
+	wrapper.addEventListener('touchend', function (e) {
+		var currentTop = getTop();
+		var distance = end - bp,
+				distanceAbs = Math.abs(distance);
+		if (distanceAbs > height * percentToTurn) {
+			var targetLocation = 0;
+			if (distance < 0) {//往上走
+				if (index < pageCount) {
+					targetLocation = -(index * height);
+					index++;
+				} else {
+					targetLocation = -(index - 1) * height;
+				}
+			} else {//下拉
+				if (index == 1) {
+					targetLocation = 0;
+				} else {
+					index--;
+					targetLocation = -(index) * height;
+				}
+			}
+		} else {
+			targetLocation = -(index - 1) * height;
+		}
+		wrapper.style.webkitTransition = 'top .5s';
+		wrapper.style.top = targetLocation + 'px';
+	})
+
+
+</script>
+</body>
+</html>
