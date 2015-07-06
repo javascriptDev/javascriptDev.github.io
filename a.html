@@ -1,1 +1,51 @@
-aaaaaaa
+<script>
+
+    function arr(c, m) {
+        var a = [];
+        for (var i = 0; i < c; i++) {
+            a.push(i);
+        }
+        for (var j = 0; j < m; j++) {
+            a.push(j);
+        }
+        return a;
+    }
+    var a = arr(20000, 1);
+
+    function unique(arr) {
+        var hash = {};
+        for (var i in arr) {
+            if (!hash[arr[i]]) {
+                hash[arr[i]] = 1;
+            }
+        }
+        return Object.keys(hash);
+    }
+
+    function unique2(arr) {
+        arr.sort();
+        var re = [arr[0]];
+        for (var i in arr) {
+            if (arr[i] !== re[re.length - 1]) {
+                re.push(arr[i]);
+            }
+        }
+        return re;
+    }
+
+
+    console.time('a');
+    for (var i = 0; i < 1000; i++) {
+        unique(a);
+    }
+    console.timeEnd('a');
+
+
+    console.time('aa');
+    for (var i = 0; i < 1000; i++) {
+        unique2(a);
+    }
+    console.timeEnd('aa');
+
+
+</script>
