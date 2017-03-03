@@ -5,7 +5,7 @@
 2.打开 Timeline 
 3.刷新页面
 图如下：
-![事件](../imgs/1.png)
+![事件](./imgs/1.png)
 
 ## 周期开始
 	* beforeunload  卸载当前页面之前
