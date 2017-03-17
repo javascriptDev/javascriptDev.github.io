@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title># 介绍CSS编译工具CSS Lint</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}body{font-family:Helvetica,arial,freesans,clean,sans-serif;font-size:14px;line-height:1.6;color:#333;background-color:#fff;padding:20px;max-width:960px;margin:0 auto}body>*:first-child{margin-top:0 !important}body>*:last-child{margin-bottom:0 !important}p,blockquote,ul,ol,dl,table,pre{margin:15px 0}h1,h2,h3,h4,h5,h6{margin:20px 0 10px;padding:0;font-weight:bold;-webkit-font-smoothing:antialiased}h1 tt,h1 code,h2 tt,h2 code,h3 tt,h3 code,h4 tt,h4 code,h5 tt,h5 code,h6 tt,h6 code{font-size:inherit}h1{font-size:28px;color:#000}h2{font-size:24px;border-bottom:1px solid #ccc;color:#000}h3{font-size:18px}h4{font-size:16px}h5{font-size:14px}h6{color:#777;font-size:14px}body>h2:first-child,body>h1:first-child,body>h1:first-child+h2,body>h3:first-child,body>h4:first-child,body>h5:first-child,body>h6:first-child{margin-top:0;padding-top:0}a:first-child h1,a:first-child h2,a:first-child h3,a:first-child h4,a:first-child h5,a:first-child h6{margin-top:0;padding-top:0}h1+p,h2+p,h3+p,h4+p,h5+p,h6+p{margin-top:10px}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}ul,ol{padding-left:30px}ul li>:first-child,ol li>:first-child,ul li ul:first-of-type,ol li ol:first-of-type,ul li ol:first-of-type,ol li ul:first-of-type{margin-top:0}ul ul,ul ol,ol ol,ol ul{margin-bottom:0}dl{padding:0}dl dt{font-size:14px;font-weight:bold;font-style:italic;padding:0;margin:15px 0 5px}dl dt:first-child{padding:0}dl dt>:first-child{margin-top:0}dl dt>:last-child{margin-bottom:0}dl dd{margin:0 0 15px;padding:0 15px}dl dd>:first-child{margin-top:0}dl dd>:last-child{margin-bottom:0}pre,code,tt{font-size:12px;font-family:Consolas,"Liberation Mono",Courier,monospace}code,tt{margin:0;padding:0;white-space:nowrap;border:1px solid #eaeaea;background-color:#f8f8f8;border-radius:3px}pre>code{margin:0;padding:0;white-space:pre;border:0;background:transparent}pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}pre code,pre tt{background-color:transparent;border:0}blockquote{border-left:4px solid #DDD;padding:0 15px;color:#777}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}hr{clear:both;margin:15px 0;height:0;overflow:hidden;border:0;background:transparent;border-bottom:4px solid #ddd;padding:0}table th{font-weight:bold}table th,table td{border:1px solid #ccc;padding:6px 13px}table tr{border-top:1px solid #ccc;background-color:#fff}table tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%}
+</style>
+</head>
+<body>
+<h1>介绍CSS编译工具CSS Lint (翻译)</h1>
+<p>原文链接：http://www.nczonline.NET/blog/2011/06/15/introducing-css-lint-2/</p>
+<div><p>不久以前，Nicole sullivan 和我宣布在一起工作。现在我们很高兴的向大家宣布我们<br>第一个合作的成果CSS Lint诞生了，就像你们所猜想的那样，CSS Lint的目的就是帮助你<br>写出更好的css代码。在过去几周我们花大量的时间，建设和辩论规则，以帮助大家编写更<br>有效和更优秀的CSS代码<br>规则<br>刚开始，我们制订了一些规则（在CSS Lint About中有详细的解释）。这些规则是：<br>1.解析错误应该被修复<br>2.不要使用多个class选择元素<br>3.移除空的css规则<br>4.正确的使用显示属性<br>5.不要使用太多的浮动<br>6.不要使用过多网络字体<br>7.不要使用过多的字号<br>8.不要使用id作为样式选择器<br>9.不要限定标题<br>10.标题样式只定义一次<br>11.小心使用宽度100%<br>12.属性值为0是不要写单位<br>13.css的渐变属性需要指定前缀<br>14.个浏览器专属的样式要有规范<br>15.避免使用看起来像正则表达式的css3选择器<br>16.遵守盒模型规则<br>这些规则都是通过使用一个非常简单的插件模型来创建的，它可以很容易地改变特定的规则或添加新的规则。打开或关闭特殊<br>的方法还没有暴露在web界面或是命令行上，但是他受到底层API的支持，所以寻找它的增加规则的方法很快。<br>在你的项目中<br>当我们高兴的介绍我们的web页面时，我们也注意到你们想把这个合并到你项目的框架中，为了为你们提供这方面的帮助，这里有为Node.js<br>提供的CSS Lint，你可以通过安装npm包的方式来安装CSS Lint：<br>sudo npm install -g csslint<br>一旦安装成功，你就可以导入任意数量的css文件或是目录了：、</p>
+<p>csslint foo.css bar.css dir_of_css/<br>这个工具会和web界面输出同样的信息<br>贡献<br>Css Lint在GitHub是一个完全开源的项目，我们正在积极的寻找贡献规则，修改bug和扩展的开发人员，这个工具的规则是可扩展性的，<br>通过这种方式，你可以很容易的去掉你不要的规则或是增加你需要的特殊规则，然后建立一个客户版本（或是说第三方版本）来适应你的需要<br>或者 贡献给大家使用。<br>css的解析程序 也是在DitHub上的一个开源项目，这个程序有一些已知的问题我计划尽快处理掉，但是他符合Css3的标准。<br>我希望我和 Nicole可以创造出更多的这方面的工具来帮助你们写出更好规范的前端代码，让我们享受这个过程吧！</p>
+<p>原文链接：http://www.nczonline<a class="replace_word" title=".NET知识库" href="http://lib.csdn.net/base/dotnet" target="_blank">.NET</a>/blog/2011/06/15/introducing-css-lint-2/</p>
+<p>&nbsp;</p>
+<p>19、sublimeLinter</p>
+<p>干啥事情都得学会偷懒，code也是如此。尽管grunt工具提供了jshint对js代码作检查的插件，但是，这就有点后知后觉了。如何在你code时就将错误给锁定并消灭呢？</p>
+<p>还好，使用submlime的童鞋就有福了。sublimeLinter就是这样一个提供代码检测的工具。安装package我就不多说了了，用过sublime的筒子们都知道两种方法。使用sublime控制台装不了就从github上直接安装吧。地址是：https://github.com/SublimeLinter/SublimeLinter</p>
+<p>安装好后，还要有node环境，这样才能检测。没安装node的就安装node吧。</p>
+<p>javascript和css的检测分别使用的是jshint/jslint（视你node安装了哪个）和csslint。</p>
+<p>从个人使用来看，检测只针对文件后缀来判定检测，所以，写在html中的js，css就没法做检测了。这是唯一的缺点。所以，grunt的检测还是需要做最后一步把关的。</p>
+<p>a、准备工作安装 Sublime Text 包管理工具：http://wbond.net/sublime_packages/package_control</p>
+<p>使用 Sublime Text 包管理工具安装 SublimeLinter：https://github.com/SublimeLinter/SublimeLinter</p>
+<p>安装 Node.js，建议安装 Windows Installer 版本：http://nodejs.org</p>
+<p>参数配置</p>
+<p>打开 SublimeLinter 的配置文件，Preferences-&gt;Package Settings-&gt;SublimeLinter-&gt;Settings - User，进行如下配置：</p>
+<p>b、运行模式</p>
+<p>"sublimelinter": "save-only",</p>
+<p>SublimeLinter 的运行模式，总共有四种，含义分别如下：</p>
+<p>true - 在用户输入时在后台进行即时校验；</p>
+<p>false - 只有在初始化的时候才进行校验；</p>
+<p>"load-save" - 当文件加载和保存的时候进行校验；</p>
+<p>"save-only" - 当文件被保存的时候进行校验；</p>
+<p>推荐设置为 “save-only”，这样只在编写完代码，保存的时候才校验，Sublime Text 运行会更加流畅。</p>
+<p>c、校验引擎</p>
+<p>"sublimelinter_executable_map":</p>
+<p>{</p>
+<p>"javascript":"D:/nodejs/node.exe",</p>
+<p>"css":"D:/nodejs/node.exe"</p>
+<p>}</p>
+<p>这里是配置 JavaScript 和 CSS 校验需要用到的 JS 引擎（这里用的是 Node.js）的安装路径。</p>
+<p>d、JSHint 选项</p>
+<p>SublimeLinter 使用 JSHint 作为默认的 JavaScript 校验器，也可以配置为 jslint 和 gjslint（closure linter）。下面我使用的 jshint 校验选项，大家可以根据自己的编码风格自行配置，选项的含义可以参考这里：http://www.jshint.com/docs/#options</p>
+<p>"jshint_options":</p>
+<p>{</p>
+<p>"strict": true,</p>
+<p>"noarg": true,</p>
+<p>"noempty": true,</p>
+<p>"eqeqeq": true,</p>
+<p>"undef": true,</p>
+<p>"curly": true,</p>
+<p>"forin": true,</p>
+<p>"devel": true,</p>
+<p>"jquery": true,</p>
+<p>"browser": true,</p>
+<p>"wsh": true,</p>
+<p>"evil": true</p>
+<p>}</p>
+<p>e、CSSLint 选项</p>
+<p>SublimeLinter 使用 CSSLint 作为 CSS 的校验器，下面是默认配置的校验选项，可以根据个人编码风格修改：</p>
+<p>"csslint_options":</p>
+<p>{</p>
+<p>"adjoining-classes": "warning",</p>
+<p>"box-model": true,</p>
+<p>"box-sizing": "warning",</p>
+<p>"compatible-vendor-prefixes": "warning",</p>
+<p>"display-property-grouping": true,</p>
+<p>"duplicate-background-images": "warning",</p>
+<p>"duplicate-properties": true,</p>
+<p>"empty-rules": true,</p>
+<p>"errors": true,</p>
+<p>"fallback-colors": "warning",</p>
+<p>"floats": "warning",</p>
+<p>"font-faces": "warning",</p>
+<p>"font-sizes": "warning",</p>
+<p>"gradients": "warning",</p>
+<p>"ids": "warning",</p>
+<p>"import": "warning",</p>
+<p>"important": "warning",</p>
+<p>"known-properties": true,</p>
+<p>"outline-none": "warning",</p>
+<p>"overqualified-elements": "warning",</p>
+<p>"qualified-headings": "warning",</p>
+<p>"regex-selectors": "warning",</p>
+<p>"rules-count": "warning",</p>
+<p>"shorthand": "warning",</p>
+<p>"star-property-hack": "warning",</p>
+<p>"text-indent": "warning",</p>
+<p>"underscore-property-hack": "warning",</p>
+<p>"unique-headings": "warning",</p>
+<p>"universal-selector": "warning",</p>
+<p>"vendor-prefix": true,</p>
+<p>"zero-units": "warning"</p>
+<p>}</p>
+<p>f、提供一下一下自己的配置</p>
+<p>{</p>
+<p>"sublimelinter": "save-only",</p>
+<p>"sublimelinter_popup_errors_on_save": true,</p>
+<p>"sublimelinter_executable_map": {</p>
+<p>"javascript": "D:/nodejs/node.exe",</p>
+<p>"css": "D:/nodejs/node.exe"</p>
+<p>},</p>
+<p>"jshint_options": {</p>
+<p>"strict": false,</p>
+<p>"quotmark": "single", //只能使用单引号</p>
+<p>"noarg": true,</p>
+<p>"noempty": true, //不允许使用空语句块{}</p>
+<p>"eqeqeq": true, //!==和===检查</p>
+<p>"undef": true,</p>
+<p>"curly": true, //值为true时，不能省略循环和条件语句后的大括号</p>
+<p>"forin": true, //for in hasOwnPropery检查</p>
+<p>"devel": true,</p>
+<p>"jquery": true,</p>
+<p>"browser": true,</p>
+<p>"wsh": true,</p>
+<p>"evil": true,</p>
+<p>"unused": "vars", //形参和变量未使用检查</p>
+<p>"latedef": true, //先定义变量，后使用</p>
+<p>"globals": {</p>
+<p>"grunt": true,</p>
+<p>"module": true,</p>
+<p>"window": true,</p>
+<p>"jQuery": true,</p>
+<p>"$": true,</p>
+<p>"global": true,</p>
+<p>"document": true,</p>
+<p>"console": true,</p>
+<p>"setTimeout": true,</p>
+<p>"setInterval": true</p>
+<p>}</p>
+<p>},</p>
+<p>"csslint_options": {</p>
+<p>"adjoining-classes": false,</p>
+<p>"box-sizing": false,</p>
+<p>"box-model": false,</p>
+<p>"compatible-vendor-prefixes": false,</p>
+<p>"floats": false,</p>
+<p>"font-sizes": false,</p>
+<p>"gradients": false,</p>
+<p>"important": false,</p>
+<p>"known-properties": false,</p>
+<p>"outline-none": false,</p>
+<p>"qualified-headings": false,</p>
+<p>"regex-selectors": false,</p>
+<p>"shorthand": false,</p>
+<p>"text-indent": false,</p>
+<p>"unique-headings": false,</p>
+<p>"universal-selector": false,</p>
+<p>"unqualified-attributes": false</p>
+<p>}</p>
+<p>}</p>
+<p>考虑到csslint的检测比较坑爹，为了覆盖默认的设置（否则每次保存，将有错误和警告提示，其中属性值为true则是错误提示，为warning则是警告提示），我们必须在user setting中重新设置true为false，这样就没有提示啦。这个设置参考了bootstrap的.csslintrc文件配置。</p></div>
+<!-- This document is made by md2html, website is http://www.zai17.com/md2html -->
+<!-- Use style in style1-->
+</body>
+</html>
