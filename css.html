@@ -1,0 +1,1005 @@
+<html>
+ <head> 
+ <meta charset="utf-8">
+  <style type="text/css">
+            h1,h2,h3,h4,h5,h6,p,blockquote{margin:0;padding:0}body{font-family:"Helvetica Neue",Helvetica,"Hiragino Sans GB",Arial,sans-serif;font-size:13px;line-height:18px;color:#737373;margin:10px 13px 10px 13px}a{color:#0069d6}a:hover{color:#0050a3;text-decoration:none}a img{border:0}p{margin-bottom:9px}h1,h2,h3,h4,h5,h6{color:#404040;line-height:36px}h1{margin-bottom:18px;font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:16px}h5{font-size:14px}h6{font-size:13px}hr{margin:0 0 19px;border:0;border-bottom:1px solid #ccc}blockquote{padding:13px 13px 21px 15px;margin-bottom:18px;font-family:georgia,serif;font-style:italic}blockquote:before{content:"\201C";font-size:40px;margin-left:-10px;font-family:georgia,serif;color:#eee}blockquote p{font-size:14px;font-weight:300;line-height:18px;margin-bottom:0;font-style:italic}code,pre{font-family:Monaco,Andale Mono,Courier New,monospace}code{background-color:#fee9cc;color:rgba(0,0,0,0.75);padding:1px 3px;font-size:12px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}pre{display:block;padding:14px;margin:0 0 18px;line-height:16px;font-size:11px;border:1px solid #d9d9d9;white-space:pre-wrap;word-wrap:break-word}pre code{background-color:#fff;color:#737373;font-size:11px;padding:0}@media screen and (min-width:768px){body{width:748px;margin:10px auto}}.hljs{display:block;overflow-x:auto;padding:.5em;background:#eee;color:black}.hljs-link,.hljs-emphasis,.hljs-attribute,.hljs-addition{color:#070}.hljs-emphasis{font-style:italic}.hljs-strong,.hljs-string,.hljs-deletion{color:#d14}.hljs-strong{font-weight:bold}.hljs-quote,.hljs-comment{color:#998;font-style:italic}.hljs-section,.hljs-title{color:#900}.hljs-class .hljs-title,.hljs-type{color:#458}.hljs-variable,.hljs-template-variable{color:#369}.hljs-bullet{color:#970}.hljs-meta{color:#34b}.hljs-code,.hljs-number,.hljs-literal,.hljs-keyword,.hljs-selector-tag{color:#099}.hljs-regexp{background-color:#fff0ff;color:#808}.hljs-symbol{color:#990073}.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#070}
+        </style> 
+ </head> 
+ <body> 
+  <h1 id="available-linters"> 可用的 lint (纯手写)</h1> 
+  <ul> 
+   <li> <a href="#attributequotes"> 属性选择器引号 </a> </li> 
+   <li> <a href="#borderzero"> 0边框 </a> </li> 
+   <li> <a href="#comment"> 注释 </a> </li> 
+   <li> <a href="#decimalzero"> 浮点数 </a> </li> 
+   <li> <a href="#depthlevel"> 层级深度 </a> </li> 
+   <li> <a href="#duplicateproperty"> 样式重复定义 </a> </li> 
+   <li> <a href="#emptyrule"> 空规则 </a> </li> 
+   <li> <a href="#finalnewline"> 文件最后的空行 </a> </li> 
+   <li> <a href="#hexlength"> 16进制颜色 </a> </li> 
+   <li> <a href="#hexnotation"> 16进制写法 </a> </li> 
+   <li> <a href="#hex正确ation"> 16进制颜色校验 </a> </li> 
+   <li> <a href="#idselector"> id 选择器 </a> </li> 
+   <li> <a href="#importantrule"> important规则 </a> </li> 
+   <li> <a href="#importpath"> import路径规则 </a> </li> 
+   <li> <a href="#maxcharperline"> 行最大字符长度 </a> </li> 
+   <li> <a href="#newlineafterblock"> 换行规则 </a> </li> 
+   <li> <a href="#propertyordering"> 属性排序 </a> </li> 
+   <li> <a href="#propertyunits"> 属性单位 </a> </li> 
+   <li> <a href="#qualifyingelement"> qualifyingElement </a> </li> 
+   <li> <a href="#selectornaming"> 选择器命名-驼峰 </a> </li> 
+   <li> <a href="#singlelineperproperty"> 单行单样式 </a> </li> 
+   <li> <a href="#singlelineperselector"> 单行单选择器 </a> </li> 
+   <li> <a href="#spaceafterpropertycolon"> 冒号后面空格 </a> </li> 
+   <li> <a href="#spaceafterpropertyname"> 属性后不加空格 </a> </li> 
+   <li> <a href="#spaceafterpropertyvalue"> 属性值后面空格 </a> </li> 
+   <li> <a href="#spacearoundcomma"> 逗号后面空格 </a> </li> 
+   <li> <a href="#spacearoundoperator"> calc加号前后空格 </a> </li> 
+   <li> <a href="#spacebeforebrace"> 花括号开始前面空格 </a> </li> 
+   <li> <a href="#spacebetweenparens"> 小括号空格 </a> </li> 
+   <li> <a href="#stringquotes"> 字符串引号 </a> </li> 
+   <li> <a href="#trailingsemicolon"> 分号是否书写 </a> </li> 
+   <li> <a href="#universalselector"> 通配符选择器 </a> </li> 
+   <li> <a href="#urlformat"> url 规则 </a> </li> 
+   <li> <a href="#urlquotes"> url 引号 </a> </li> 
+   <li> <a href="#variablevalue"> 变量的值(属性值是否使用变量) </a> </li> 
+   <li> <a href="#zerounit"> 0值 </a> </li> 
+  </ul> 
+  <h2 id="attributequotes"> 属性选择器引号 </h2> 
+  <p> 属性选择器必须加引号 </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=text]</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type='text']</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=&quot;text&quot;]</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="borderzero"> 无边框 </h2> 
+  <p> 无边框是 赋值为0还是 none. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> 样式 </code> </td> 
+     <td> <code> none </code> , <code> zero </code> ( <strong> 默认 </strong> ) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="none"> none </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">border</span>: none;
+}
+</code></pre> 
+  <h3 id="zero"> zero </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+ 
+  <h2 id="decimalzero"> 浮点数写法 </h2> 
+  <p> 浮点数 前零 后零 都不写 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> leading </code> </td> 
+     <td> 小数前面的0不可省略</td> 
+    </tr> 
+    <tr> 
+     <td> <code> trailing </code> </td> 
+     <td> 小数后面的0不可省略 </td> 
+    </tr> 
+    <tr> 
+     <td> <code> both </code> </td> 
+     <td> 小数前后零都需要</td> 
+    </tr> 
+    <tr> 
+     <td> <code> none </code> </td> 
+     <td> 小数点前后零都不要写( <strong> 默认 </strong> ). </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less">.foo {
+  font-size: <span class="hljs-number">.5</span>em;  <span class="hljs-comment">// leading, both</span>
+  font-size: <span class="hljs-number">1</span>em;   <span class="hljs-comment">// trailing, both</span>
+  font-size: <span class="hljs-number">1.0</span>em; <span class="hljs-comment">// none</span>
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less">.foo {
+  font-size: <span class="hljs-number">0.5</span>em; <span class="hljs-comment">// leading, both</span>
+  font-size: <span class="hljs-number">1.0</span>em; <span class="hljs-comment">// trailing, both</span>
+  font-size: <span class="hljs-number">.5</span>em;  <span class="hljs-comment">// none</span>
+}
+</code></pre> 
+  <h2 id="depthlevel"> 层级深度 </h2> 
+  <p> 设置样式的层级深度</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> depth </code> </td> 
+     <td> 从1 到 n 整数 , 3 ( <strong> 默认 </strong> ). </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="不正确-depth-3-"> 不正确 (depth 3) </h3> 
+  <pre><code class="lang-less">.foo {
+    margin-right: 0;
+    .foo-2 {
+        color: red;
+        .foo-3 {
+            width: 100%;
+            .foo-4 {
+                height: 100%;
+            }
+        }
+    }
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less">.foo {
+    margin-right: 0;
+    .foo-2 {
+        color: red;
+        .foo-3 {
+            width: 100%;
+        }
+    }
+}
+</code></pre> 
+  <h2 id="duplicateproperty"> 属性重复 </h2> 
+  <p> 不允许有任何重复的属性. </p> 
+  <p> 为了兼容性,可以 <code> 排除一些属性 </code> 不被 <code> lesshint </code>  </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> exclude </code> </td> 
+     <td> 排除属性 一个数组. 比如<code> background-color </code> 就会排除background-color</td> 
+    </tr>  
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+    <span class="hljs-attribute">color</span>: blue;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="emptyrule"> 空块 </h2> 
+  <p>不能有空块 </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="finalnewline"> 文件末尾有个空行 </h2> 
+  <p> 所有文件的最后一行都要留一个空行.便于 diff </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+...
+</code></pre> 
+  <h2 id="hexlength"> 16进制颜色 </h2> 
+  <p> 16进制颜色一定要写全6位.不要缩写</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> long </code> ( <strong> 默认 </strong> ), <code> short </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="long"> long </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#000000</span>;
+}
+</code></pre> 
+  <h3 id="short"> short </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;
+}
+</code></pre> 
+  <h2 id="hexnotation"> 16进制写法 </h2> 
+  <p>16进制颜色要小写,便于阅读. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> lowercase </code> ( <strong> 默认 </strong> ), <code> uppercase </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="lowercase"> lowercase </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#abcdef</span>;
+}
+</code></pre> 
+  <h3 id="uppercase"> uppercase </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ABCDEF</span>;
+}
+</code></pre> 
+  <h2 id="hex正确ation"> 16进制颜色校验 </h2> 
+  <p>16进制颜色校验是否合法.</p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ab</span>;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#abc</span>;
+}
+</code></pre> 
+  <h2 id="idselector">  id 选择器 </h2> 
+  <p> 不要书写 id 选择器. 因为 id 不容易被复写. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> exclude </code> </td> 
+     <td> 排除的 ID,用数组表示.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-id">#foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="importantrule"> important 规则 </h2> 
+  <p> 不允许使用 <code> !important </code> </p>
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red <span class="hljs-meta">!important</span>;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="importpath"> import 路径规则 </h2> 
+  <p> 引入文件不能以 <code>_</code> 开头.</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> filenameExtension </code> (文件拓展名) </td> 
+     <td> <code> false </code> , <code> true </code> ( <strong> 默认 </strong> )</td> 
+    </tr> 
+    <tr> 
+     <td> <code> leadingUnderscore </code> (_) </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> true </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> exclude </code> </td> 
+     <td> 排除的文件数组 </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less">@<span class="hljs-keyword">import</span> <span class="hljs-string">'foo.less'</span>;
+@<span class="hljs-keyword">import</span> <span class="hljs-string">'_bar'</span>;
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less">@<span class="hljs-keyword">import</span> <span class="hljs-string">'foo'</span>;
+@<span class="hljs-keyword">import</span> <span class="hljs-string">'bar'</span>;
+</code></pre> 
+  <h2 id="maxcharperline"> 单行最多字符数目 </h2> 
+  <p> 单行不能超过规定的长度 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> limit </code> </td> 
+     <td> <code> 200 </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less">.foo {
+    color: red; <span class="hljs-comment">// A really long comment that's more than 100 chars...</span>
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less">.foo {
+    color: red; <span class="hljs-comment">// A short comment that's less than 100 chars</span>
+}
+</code></pre> 
+  <h2 id="newlineafterblock"> 块后空行 </h2> 
+  <p> 每一个属性块前面都要有一空行. </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+<span class="hljs-selector-class">.bar</span> {
+    <span class="hljs-attribute">color</span>: blue;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-class">.bar</span> {
+    <span class="hljs-attribute">color</span>: blue;
+}
+</code></pre> 
+  <h2 id="propertyordering"> 属性字母排序 </h2> 
+  <p> 确保每个属性都要按照字母排序. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> alpha </code> ( <strong> 默认 </strong> ) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="propertyunits"> 属性单位 </h2> 
+  <p> 设置那些属性单位可以被使用. </p> 
+  <p> 默认情况下可以使用任何单位</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> valid </code> </td> 
+     <td>  允许的单位 (默认情况全部单位都可以) </td> 
+    </tr> 
+    <tr> 
+     <td> <code> invalid </code> </td> 
+     <td> 不允许使用的单位</td> 
+    </tr> 
+    <tr> 
+     <td> <code> properties </code> </td> 
+     <td> Object with property names and allowed units (默认为空) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <pre><code class="lang-js"><span class="hljs-string">&quot;propertyUnits&quot;</span>: {
+    <span class="hljs-string">&quot;valid&quot;</span>: [<span class="hljs-string">&quot;rem&quot;</span>, <span class="hljs-string">&quot;vw&quot;</span>], <span class="hljs-comment">// 这些单位可以被任何属性赋值使用.</span>
+    <span class="hljs-string">&quot;invalid&quot;</span>: [<span class="hljs-string">&quot;pt&quot;</span>],      <span class="hljs-comment">//  'pt' 不能被使用.</span>
+    <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;line-height&quot;</span>: []   <span class="hljs-comment">// line-height 不能使用任何单位.</span>
+    }
+}
+</code></pre> 
+  <pre><code class="lang-less">.foo {
+    font-size: <span class="hljs-number">1.5</span>rem; <span class="hljs-comment">// Allowed</span>
+    line-height: <span class="hljs-number">30</span>px; <span class="hljs-comment">// Not allowed</span>
+}
+</code></pre> 
+  <h2 id="qualifyingelement"> 元素名前置 </h2> 
+  <p> 选择器不能以元素名开头. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> allowWithAttribute </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> true </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> allowWithClass </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> true </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> allowWithId </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> true </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-tag">div</span><span class="hljs-selector-attr">[foo='bar']</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-tag">div</span><span class="hljs-selector-id">#foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-attr">[foo='bar']</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-id">#foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="selectornaming"> 选择器命名 </h2> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> disallowUppercase </code> </td> 
+     <td> <code> true </code> ( <strong> 默认 </strong> ), <code> boolean </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> disallowUnderscore </code> </td> 
+     <td> <code> true </code> ( <strong> 默认 </strong> ), <code> boolean </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> disallowDash </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> boolean </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> exclude </code> </td> 
+     <td> <code> 字符串数组 </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <pre><code class="lang-js"><span class="hljs-keyword">var</span> options = {
+    disallowUppercase: <span class="hljs-literal">true</span>,
+    disallowUnderscore: <span class="hljs-literal">true</span>,
+    exclude: [<span class="hljs-string">'fooExcluded'</span>]
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo-bar</span> {
+
+}
+
+<span class="hljs-selector-class">.fooExcluded</span> {
+
+}
+</code></pre> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.fooBar</span> {
+
+}
+
+<span class="hljs-selector-class">.foo_bar</span> {
+
+}
+</code></pre> 
+ 
+  <h2 id="singlelineperproperty"> 每行写一个属性 </h2> 
+  <p> 每一行只允许写一个属性 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> 单行属性 </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> true </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red; <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+}
+
+<span class="hljs-selector-class">.bar</span> { <span class="hljs-attribute">color</span>: red; }
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+}
+
+<span class="hljs-selector-class">.bar</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="正确-with-allowsinglelinerules-true-"> 正确  <code> allowSingleLineRules: true </code> </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.bar</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-class">.bar</span> { <span class="hljs-attribute">color</span>: red; }
+</code></pre> 
+  <h2 id="singlelineperselector"> 单行单选择器 </h2> 
+  <p> 每一行只能选择一个元素. </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less">.foo, .bar {
+    color: red;
+    }
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less">.foo,
+.bar {
+    color: red;
+}
+
+</code></pre> 
+  <h2 id="spaceafterpropertycolon"> 分号后空格 </h2> 
+  <p> 分号后面一个空格.</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_space </code> , <code> one_space </code> ( <strong> 默认 </strong> ) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_space"> no_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin</span>:<span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h3 id="one_space"> one_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h2 id="spaceafterpropertyname"> 属性值后面空格 </h2> 
+  <p> 属性后不加空格 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_space </code> ( <strong> 默认 </strong> ), <code> one_space </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_space"> no_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h3 id="one_space"> one_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin </span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h2 id="spaceafterpropertyvalue"> 属性值后面空格 </h2> 
+  <p> 属性值后面不加空格 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_space </code> ( <strong> 默认 </strong> ), <code> one_space </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_space"> no_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h3 id="one_space"> one_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> ;
+}
+</code></pre> 
+  <h2 id="spacearoundcomma"> 逗号后面空格 </h2> 
+  <p> 逗号后面加空格 </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> allowNewline </code> </td> 
+     <td> <code> false </code> ( <strong> 默认 </strong> ), <code> boolean </code> </td> 
+    </tr> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> after </code> ( <strong> 默认 </strong> ), <code> before </code> , <code> both </code> , <code> none </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="after"> after </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(255, 255, 255);
+}
+</code></pre> 
+  <h3 id="before"> before </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(255 ,255 ,255);
+}
+</code></pre> 
+  <h3 id="both"> both </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(255 , 255 , 255);
+}
+</code></pre> 
+  <h3 id="none"> none </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(255,255,255);
+}
+</code></pre> 
+  <h3 id="allownewline-true"> allowNewline : true </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+  <span class="hljs-attribute">font</span>:
+    <span class="hljs-number">14px</span>,
+    Roboto,
+    <span class="hljs-number">#000</span>;
+}
+</code></pre> 
+  <h2 id="spacearoundoperator"> 运算符加号前后空格 </h2> 
+  <p> 定义 运算符 ( <code> + </code> , <code> - </code> , <code> * </code> , <code> / </code> , and <code> = </code> ) 前后空格怎么加更加易读.默认前后都加一个空格. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> both </code> ( <strong> 默认 </strong> ), <code> none </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="both"> both </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">height</span>: <span class="hljs-built_in">calc</span>(10px + 10px);
+}
+</code></pre> 
+  <h3 id="none"> none </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">height</span>: <span class="hljs-built_in">calc</span>(10px+10px);
+}
+</code></pre> 
+  <h2 id="spacebeforebrace"> 花括号开始前面空格 </h2> 
+  <p> 花括号开始前面加一个空格. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_space </code> , <code> one_space </code> ( <strong> 默认 </strong> ), <code> new_line </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_space"> no_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span>{
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="one_space"> one_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="new_line"> new_line </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span>
+{
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="spacebetweenparens"> 小括号内侧空格 </h2> 
+  <p> 小括号内部不需要空格默认. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_space </code> ( <strong> 默认 </strong> ), <code> one_space </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_space"> no_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(255, 255, 255);
+}
+</code></pre> 
+  <h3 id="one_space"> one_space </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>( 255, 255, 255 );
+}
+</code></pre> 
+  <h2 id="stringquotes"> 字符串引号 </h2> 
+  <p> 字符串默认使用单引号. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> double </code> , <code> single </code> ( <strong> 默认 </strong> ) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;Hello world&quot;</span>;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">content</span>: <span class="hljs-string">'Hello world'</span>;
+}
+</code></pre> 
+  <h2 id="trailingsemicolon"> 末尾分号 </h2> 
+  <p> 需要末尾分号. </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  
+
+  <h2 id="urlformat"> url 格式 </h2> 
+  
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> absolute </code> , <code> relative </code> ( <strong> 默认 </strong> ) </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'http://example.com/img/image.jpg'</span>);
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'img/image.jpg'</span>);
+}
+</code></pre> 
+  <h2 id="universalselector"> 通配符选择器 </h2> 
+  <p> 不能使用通配符选择器 </p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less">* {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-class">.foo</span> * {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-class">.foo</span> <span class="hljs-selector-class">.bar</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+</code></pre> 
+  <h2 id="urlquotes"> url 引号 </h2> 
+  <p> 默认不要引号.</p> 
+  <h3 id="invalid"> 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>('img/image.jpg');
+}
+</code></pre> 
+  <h3 id="valid"> 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">img/image.jpg</span>);
+}
+</code></pre> 
+  <h2 id="variablevalue"> 变量的值 </h2> 
+  <p> 属性的值是否使用变量. </p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> always </code> </td> 
+     <td> 总是使用变量的. </td> 
+    </tr> 
+    <tr> 
+     <td> <code> never </code> </td> 
+     <td> 从不使用变量的. </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="always-color-正确"> always ['color'] 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: @success;
+}
+</code></pre> 
+  <h3 id="always-color-不正确"> always ['color'] 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;
+}
+</code></pre> 
+  <h3 id="never-color-正确"> never ['color'] 正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;
+}
+</code></pre> 
+  <h3 id="never-color-不正确"> never ['color'] 不正确 </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">color</span>: @success;
+}
+</code></pre> 
+  <h2 id="zerounit"> 0值单位 </h2> 
+  <p> 值为的0的属性,不写单位.</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th> 选项 </th> 
+     <th> 描述 </th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td> <code> style </code> </td> 
+     <td> <code> no_unit </code> ( <strong> 默认 </strong> ) , <code> keep_unit </code> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3 id="no_unit"> no_unit </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">0</span>;
+}
+</code></pre> 
+  <h3 id="keep_unit"> keep_unit </h3> 
+  <pre><code class="lang-less"><span class="hljs-selector-class">.foo</span> {
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">0px</span>;
+}
+</code></pre> 
+    
+ </body>
+</html>
